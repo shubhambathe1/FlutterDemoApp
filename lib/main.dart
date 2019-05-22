@@ -2,6 +2,55 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
+class FavoriteWidget extends StatefulWidget {
+  @override
+  _FavoriteWidgetState createState() => _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorited = false;
+  int _favoriteCount = 41;
+// ···
+
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        _favoriteCount -= 1;
+        _isFavorited = false;
+      } else {
+        _favoriteCount += 1;
+        _isFavorited = true;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+            color: (_isFavorited ? Colors.red[500] : Colors.amber[500]),
+            onPressed: _toggleFavorite,
+          ),
+        ),
+        SizedBox(
+          width: 18,
+          child: Container(
+            child: Text('$_favoriteCount'),
+          ),
+        ),
+      ],
+    );
+  }
+
+}
+
+
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
@@ -37,11 +86,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         /*3*/
-        Icon(
-          Icons.star,
-          color: Colors.red[500],
-        ),
-        Text('41'),
+        FavoriteWidget(),
+//        Icon(
+//          Icons.star,
+//          color: Colors.red[500],
+//        ),
+//        Text('41'),
       ],
     ),
   );
@@ -122,59 +172,75 @@ class MyApp extends StatelessWidget {
             title: Text('Flutter layout demo'),
           ),
           body:
-//    Center(
-//          child: Text('Hello Flutter World'),
-//              ListView(
-//            children: [
-//              Image.asset(
-//                'images/lake.jpg',
-//                width: 600,
-//                height: 240,
-//                fit: BoxFit.cover,
-//              ),
-//              titleSection,
-//              buttonSection,
-//              textSection,
-//            ],
+
+          ListView(
+            children: [
+              Image.asset(
+                'images/lake.jpg',
+                width: 100,
+                height: 240,
+                fit: BoxFit.cover,
+              ),
+              titleSection,
+              buttonSection,
+              textSection,
+            ],
+          )
+
+
+
+//          Column(
+//      children: <Widget>[
+//      Expanded(
+//      child: Container(
+//      // decoration: const BoxDecoration(color: Colors.red),
+//      child: Center(
+//      child: Container(
+//          height: 100,
+//          width: 100,
+//          child:Card(
+//              child: Center(
+//                child: Text("HELLO FLUTTER"),
+//              )
 //          )
-        Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                // decoration: const BoxDecoration(color: Colors.red),
-                child: Center(
-                      child: Container(
-                      height: 100,
-                      width: 100,
-                      child:Card(
-                        child: Center(
-                          child: Text("HELLO FLUTTER"),
-                        )
-                      )
-                    )
+//      )
+//
+//
+//    )
+//    ),
+//    flex: 3,
+//    ),
+//    Expanded(
+//    child: Container(
+//    decoration: const BoxDecoration(color: Colors.green),
+//    ),
+//    flex: 2,
+//    ),
+//    Expanded(
+//    child: Container(
+//    decoration: const BoxDecoration(color: Colors.blue),
+//    ),
+//    flex: 1,
+//    ),
+//    ],
+//    ),
 
 
-                )
-              ),
-              flex: 3,
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(color: Colors.green),
-              ),
-              flex: 2,
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(color: Colors.blue),
-              ),
-              flex: 1,
-            ),
-          ],
-        ),
-
-
+//     Container(
+//      decoration: BoxDecoration(color: Colors.white),
+//      child: Center(
+//        child: Text(
+//          'Hello World',
+//          textDirection: TextDirection.ltr,
+//          style: TextStyle(
+//            fontSize: 32,
+//            color: Colors.pink,
+//          ),
 //        ),
+//      ),
+//    )
+
+
           ),
     );
 
